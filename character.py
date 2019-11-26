@@ -1,6 +1,6 @@
 # ------------------- Characters
 class Character(object):
-    def __init__(self,name, alive, hp, sp, chanceDodge, chanceParry, chanceCriticalHit, MP, damageMin, damageMax, armor,
+    def __init__(self, name, alive, hp, sp, chanceDodge, chanceParry, chanceCriticalHit, MP, damageMin, damageMax, armor,
                  lvl, XP, inventory, lvlNext):
         self.inventory = inventory
         self.name = name
@@ -33,10 +33,9 @@ class Character(object):
             print(str(x) + ";", skill)
             x += 1
 
-
     def fire_at(self, enemy):
-        if self.armormo >= 1:
-            self.armormo -= 1
+        if self.armor >= 1:
+            self.armor -= 1
             print(self.name, "fires on", enemy.name)
             enemy.hit()
         else:
@@ -73,6 +72,7 @@ class Hero(Character):
         super().__init__(name=input("Enter your name for the games:"), alive=True, hp=20, sp=1,
                          chanceDodge=0, chanceParry=0, chanceCriticalHit=0, MP=2, damageMin=0, damageMax=15,
                          armor="", lvl=1, XP=0, lvlNext = 30)
+
 
 # ---------------------  Monsters
 class Monster(Character):

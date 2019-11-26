@@ -25,6 +25,8 @@ hero.inventory = []
 # inventory = Inventory()
 # inventory.add_objects(Weapon('Sword', 5))
 # inventory.add_objects(Armor('Armor_1', 0))
+# TODO link inventory and hero, inventory and merchants
+# TODO battle
 
 
 playAgain = 'yes'

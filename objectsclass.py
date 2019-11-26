@@ -17,9 +17,8 @@ class Consumables(Objects):
         self.help = consu_help
         self.damage = damage
 
-class Weapon(Objects,Equipments):
+class Weapon(Equipments):
     def __init__(self,damage_added,characteristics):
-        Objects.__init__()
         Equipments.__init__()
         self.damageAdded = damage_added
         self.characteristics = characteristics
@@ -29,9 +28,8 @@ class Weapon(Objects,Equipments):
     def raise_characteristics(self):
         self.characteristics += 1
 
-class Armor(Objects,Equipments):
+class Armor(Equipments):
     def __init__(self,armor,characteristics):
-        Objects.__init__()
         Equipments.__init__()
         self.armor= armor
         self.characteristics = characteristics
@@ -42,9 +40,8 @@ class Armor(Objects,Equipments):
         self.characteristics += 1
         self.gold_value += 1
 
-class Jewels(Objects,Equipments):
+class Jewels(Equipments):
     def __init__(self):
-        Objects.__init__()
         Equipments.__init__()
         self.slots = 2  #hand left and hand right
     def raise_stat(self):
