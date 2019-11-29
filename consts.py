@@ -1,3 +1,4 @@
+#this is the parameters preparing for the map
 CELL_SIZE=80
 MAP_ROWS=11
 MAP_COLS=11
