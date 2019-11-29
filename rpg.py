@@ -90,6 +90,14 @@ class Character():
         # return a random number for the impact of the battle on stats
         return random.random() <= stat / 100
 
+    def bewitch(self, spell_list):
+        # return the cost of the spell
+        i = 1
+        for spell in spell_list:
+            print(str(i) + ":", spell.name, "(cost:", str(spell.cost) + ")")
+            i += 1
+
+
     def fight(self, monster):
         # if both monster and hero are alive, a battle can happen:
         while monster.hp > 0 and self.hp > 0:
@@ -122,13 +130,30 @@ class Character():
                     attack = 0
                     message = monster.name + " dodged the attack"
                 print(message)
-                print(monster.name, "took", round(attack, 2), "damages")
+                print(monster.name, "took", round(attack, 2), "damages\nPress ""enter"" to continue...")
                 input()
                 # An attack takes 2 hp:
                 monster.hp -= round(attack, 2)
             else:
-                # TODO if choice == "2":
-                pass
+                if choice == "2":
+                    flag = 1
+                    while flag == 1:
+                        message = "You bewitch " + monster.name
+                        self.bewitch(spell_list)
+                        spell = int(input("Choose your spell:").lower())
+                        current_mp = self.mp
+
+                        if spell == "fire" or spell == "1":
+                            print("")
+                        if spell == "thunder" or spell == "2":
+                            print("")
+                        else:
+                            print("Imagination not enough powerful to throw a spell\nError of typo")
+                            flag = 0    # quit while loop so that the hero isn't loosing gold for an error of spelling and no spell
+                        print(monster.name, "took", round(spell, 3), "MP damages\nPress ""enter"" to continue...")
+                        input()
+                        # A spell thrown takes 3 mp:
+                        monster.hp -= round(spell, 3)
             if monster.hp <= 0: return 1  # the monster is dead
             message = monster.name + " hit you"  # it's the turn of the monster to show his strength
             attack = monster.attack()
@@ -142,9 +167,19 @@ class Character():
                 attack = 0
                 message = "You dodged the attack"
             print(message)
-            print("You took", round(attack, 2), "damages")
+            print("You took", round(attack, 2), "damages\nPress ""enter"" to continue...")
             input()
             self.hp -= round(attack, 2)
+
+
+class Spell():
+    def __init__(self, name, cost, dmg):
+        self.name = name
+        self.cost = cost
+        self.dmg = dmg
+
+
+spell_list = [Spell("fire", 3, 8), Spell("thunder", 4, 10)]
 
 
 class Monster(Character):
@@ -160,8 +195,10 @@ class Monster(Character):
 
 
 def MonstersList():
-    # TODO add other monsters
-    monsters = [Monster("Orc", 10, 3, 4, 4, 4, 0, 3, 1, 0, 4, 6, None, 50), ]
+    monsters = [Monster("Orc", 10, 3, 4, 4, 4, 0, 3, 1, 0, 4, 6, None, 50),
+                Monster("goblin",  15, 3, 4, 3, 5, 0, 3, 1, 0, 4, 7, None, 60),
+                Monster("giant", 15, 4, 4, 4, 4, 0, 4, 1, 0, 5, 7, None, 70)]
+
     return random.choice(monsters)
 
 
@@ -272,15 +309,15 @@ class Room():
 		Display actions for the room
 		"""
         if self.entity is None and self.objects is None:  # = room is empty
-            print("There is nothing in this room!")
+            print("There is nothing in this room!\nPress ""enter"" to continue...")
             input()
         elif self.entity is not None and isinstance(self.entity, Monster):  # = surprise there is a monster
-            print(self.entity.name, "appeared in the room!")
+            print(self.entity.name, "appeared in the room!\nPress ""enter"" to continue...")
             input()
             if player.fight(self.entity) == 1:
                 print(self.entity.name, "died!")
                 print("You gained", self.entity.gold, "golds")
-                print("You gained 2xp!")
+                print("You gained 2xp!\nPress ""enter"" to continue...")
                 input()
 
                 player.inventory.gold += self.entity.gold
@@ -365,7 +402,9 @@ class Jewels(Equipment):
         super().__init__(name, goldValue, lvlMin, slotNumber, stat, effect)
 
 
-# TODO create Jewels
+# TODO create others Jewels
+ruby = [Jewels("ruby", 50, 3, 1, "hp", 5) ]
+
 
 def Intro():
     """
