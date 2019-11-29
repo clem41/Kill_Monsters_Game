@@ -1,3 +1,5 @@
+#this file help the projet to read the floor from the document floor00X.csv.
+#We have four foors
 import csv
 import os
 import pygame
