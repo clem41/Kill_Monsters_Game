@@ -140,7 +140,7 @@ class Character():
                     while flag == 1:
                         message = "You bewitch " + monster.name
                         self.bewitch(spell_list)
-                        spell = int(input("Choose your spell:").lower())
+                        spell = int(input("Choose your spell:"))
                         current_mp = self.mp
 
                         if spell == "fire" or spell == "1":
